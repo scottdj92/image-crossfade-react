@@ -1,0 +1,12 @@
+{
+    "compilerOptions": {
+        "target": "es2015",
+        "module": "es6",
+        "esModuleInterop": true,
+        "jsx": "react",
+        "allowSyntheticDefaultImports": true,
+        "types": [
+            "csstype"
+        ]
+    }
+}
