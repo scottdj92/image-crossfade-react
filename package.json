@@ -25,7 +25,26 @@
     "rollup": "^0.64.1",
     "rollup-plugin-peer-deps-external": "^2.2.0",
     "rollup-plugin-typescript2": "^0.16.1",
+    "ts-jest": "^23.1.4",
     "tslint": "^5.11.0",
     "typescript": "^3.0.1"
+  },
+  "jest": {
+    "moduleFileExtensions": [
+      "ts",
+      "tsx",
+      "js"
+    ],
+    "transform": {
+      "^.+\\.(ts|tsx)$": "ts-jest"
+    },
+    "globals": {
+      "ts-jest": {
+        "tsConfigFile": "tsconfig.json"
+      }
+    },
+    "testMatch": [
+      "**/__tests__/*.+(ts|tsx|js)"
+    ]
   }
 }
