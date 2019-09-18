@@ -1,5 +1,5 @@
 {
-  "name": "image-crossfade-react",
+  "name": "@scottdj92/image-crossfade-react",
   "version": "1.0.1",
   "description": "A crossfade image component built in React",
   "main": "./dist/index.js",
