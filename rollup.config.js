@@ -7,6 +7,7 @@ export default {
         file: "./dist/index.js",
         format: "cjs"
     },
+    external: ["react"],
     plugins: [
         peerDeps(),
         typescript()

@@ -1,4 +1,4 @@
-import React, { CSSProperties, HTMLAttributes } from "react";
+import React, { CSSProperties } from "react";
 import { TransitionTimingFunctionProperty } from "./node_modules/csstype/index";
 
 type Props = {
@@ -24,7 +24,7 @@ class CrossFadeImage extends React.Component<Props, State> {
         timingFunction: "ease",
     };
 
-    constructor (props) {
+    constructor (props: Props) {
         super(props);
         this.state = {
             bottomOpacity: 0,
@@ -36,11 +36,7 @@ class CrossFadeImage extends React.Component<Props, State> {
     public componentDidUpdate (prevProps: Props) {
         if (prevProps.src !== this.props.src) {
             this.setState({ bottomSrc: "", topSrc: ""}, () =>
-                this.setState({ bottomSrc: prevProps.src, topSrc: this.props.src, bottomOpacity: 0.99 }, () => {
-                    // if (!this.timeout) {
-                    //     clearTimeout(this.timeout);
-                    // }
-                }),
+                this.setState({ bottomSrc: prevProps.src, topSrc: this.props.src, bottomOpacity: 0.99 }),
             );
         }
     }
@@ -51,13 +47,15 @@ class CrossFadeImage extends React.Component<Props, State> {
 
         return (
             <div style={{ maxWidth: "100%", maxHeight: "100%" }} className={className}>
-                { topSrc &&
+                {topSrc &&
                     <img style={{ maxWidth: "100%", maxHeight: "100%", position: "absolute", ...style }}
                         src={topSrc}
                         alt={alt}
+                        onLoad={() => this.onLoad()}
+                        onError={(e) => this.onError(topSrc, e)}
                     />
                 }
-                { bottomSrc &&
+                {bottomSrc &&
                     <img style={{
                         maxHeight: "100%",
                         maxWidth: "100%",
@@ -65,15 +63,19 @@ class CrossFadeImage extends React.Component<Props, State> {
                         transition: `opacity ${duration / 1000}s ${timingFunction} ${delay / 1000}s`,
                         ...style,
                     }}
-                    src={bottomSrc}
+                        src={bottomSrc}
                     />
                 }
             </div>
         );
     }
 
-    private timeout () {
-        setTimeout( () => this.setState({ bottomOpacity: 0 }), 20);
+    private onLoad () {
+        this.setState({ bottomOpacity: 0 });
+    }
+
+    private onError (src: string, error: React.SyntheticEvent<HTMLImageElement, Event>) {
+        console.warn(`There is an error with ${src}: ${error}`);
     }
 }
 

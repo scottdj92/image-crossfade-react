@@ -23,3 +23,4 @@ import CrossFadeImage from "image-crossfade-react";
 
 ### Roadmap
 * improve unit tests
+* migrate to hooks
