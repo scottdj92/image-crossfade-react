@@ -60,10 +60,7 @@ typings/
 # next.js build output
 .next
 
-*.js
 !rollup.config.js
-
-dist/
 
 .rpt2_cache
 .cache
